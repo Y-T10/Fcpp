@@ -1,5 +1,8 @@
 # Fcpp
-Fontconfig c++ wrapper.
+[Fontconfig](https://www.freedesktop.org/wiki/Software/fontconfig/) のC++ ラッパーライブラリ.
+
+## 使用例
+TODO: add example code.
 
 ## License
 ### fontconfig
