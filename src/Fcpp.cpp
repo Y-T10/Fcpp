@@ -55,10 +55,6 @@ const std::filesystem::path Fcpp::SearchFont(const Pattern& pattern, const Confi
     return std::filesystem::path((char*)filePaht);
 };
 
-const Fcpp::Config Fcpp::CurrentDefaultConfig() noexcept {
-    return Config(FcConfigGetCurrent());
-}
-
 const Fcpp::Pattern Fcpp::CreatePattern(const std::map<std::string, std::basic_string<FcChar8>>& param) noexcept {
     Pattern pattern = CreateFcPtr<FcPatternCreate>();
     if(pattern.get() == nullptr) {

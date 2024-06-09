@@ -30,6 +30,5 @@ namespace Fcpp {
     }
 
     const std::filesystem::path SearchFont(const Pattern& pattern, const Config& conf = nullptr) noexcept;
-    const Config CurrentDefaultConfig() noexcept;
     const Pattern CreatePattern(const std::map<std::string, std::basic_string<FcChar8>>& param) noexcept;
 }
