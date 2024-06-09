@@ -4,6 +4,14 @@ cmake_policy(VERSION ${CMAKE_MINIMUM_REQUIRED_VERSION})
 option(CMAKE_BUILD_TYPE "Build type. (Debug, Release)" Release)
 option(BUILD_SHARED_LIBS "Create shared libraries." OFF)
 
+# "compile_commands.json"を生成するかを設定する
+find_program(CLANGD "clangd")
+if (NOT (DEFINED CLANGD-NOTFOUND))
+  set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+elseif ((NOT (DEFINED $ENV{CMAKE_EXPORT_COMPILE_COMMANDS})) AND (DEFINED CMAKE_EXPORT_COMPILE_COMMANDS))
+  set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+endif()
+
 project(Fcpp
     VERSION 0.0.1
     LANGUAGES CXX
