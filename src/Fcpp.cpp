@@ -27,14 +27,27 @@ namespace {
         }
         return fontPattern;
     }
+
+    const Pattern SubstitutePattern(const Config& conf, const Pattern& pattern) noexcept {
+        static_assert(!!FcTrue);
+        static_assert(!FcFalse);
+
+        Pattern SubstitutedPattern = CreateFcPtr<FcPatternDuplicate>(pattern.get());
+        if(!FcConfigSubstitute(conf.get(), SubstitutedPattern.get(), FcMatchPattern)) {
+            return nullptr;
+        }
+        FcDefaultSubstitute(SubstitutedPattern.get());
+        return SubstitutedPattern;
+    }
 }
 
 const std::filesystem::path Fcpp::SearchFont(const Config& conf, const Pattern& pattern) noexcept {
-    /// TODO: この処理は別関数に分けるのが良さそう?
-    FcConfigSubstitute(conf.get(), pattern.get(), FcMatchPattern);
-    FcDefaultSubstitute(pattern.get());
-    const Pattern fontPattern = FontMatch(conf, pattern);
-    if(!fontPattern.get()) {
+    const auto SearchPattern = SubstitutePattern(conf, pattern);
+    if (!SearchPattern) {
+        return "";
+    }
+    const Pattern fontPattern = FontMatch(conf, SearchPattern);
+    if(!fontPattern) {
         return "";
     }
     FcChar8* filePaht;
