@@ -2,7 +2,35 @@
 [Fontconfig](https://www.freedesktop.org/wiki/Software/fontconfig/) のC++ ラッパーライブラリ.
 
 ## 使用例
-TODO: add example code.
+フォントファミリー名からフォントを探す．([findFont.cpp](example/findFont.cpp))
+
+```C++
+#include <iostream>
+#include <cstdlib>
+
+#include "Fcpp.hpp"
+
+/// usage: findFont "font family name"
+int main(int argc, char* argv[]) {
+    FcInit();
+
+    if (argc <= 1) {
+        return EXIT_FAILURE;
+    }
+
+    const auto SearchPattern = Fcpp::CreatePattern({
+        {FC_FAMILY, (const FcChar8*)(argv[1])}
+    });
+
+    const auto FoundFath = Fcpp::SearchFont(Fcpp::CurrentDefaultConfig(), SearchPattern);
+    if(!FoundFath.empty()) {
+        std::cout << FoundFath.generic_string() << std::endl;
+    }
+
+    FcFini();
+    return 0;
+}
+```
 
 ## License
 ### fontconfig
