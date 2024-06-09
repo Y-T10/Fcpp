@@ -18,6 +18,16 @@ project(Fcpp
     DESCRIPTION "Fontconfig c++ wrapper."
 )
 
+## 親プロジェクトを持つかを調べる
+if (${CMAKE_PROJECT_NAME} STREQUAL ${PROJECT_NAME})
+    set(FCPP_SUBPROJECT OFF)
+else()
+    set(FCPP_SUBPROJECT ON)
+endif()
+
+include(CMakeDependentOption)
+cmake_dependent_option(FCPP_EXAMPLE "Build example programs." ON "NOT FCPP_SUBPROJECT" OFF)
+
 find_package(Fontconfig 2.14.0 REQUIRED)
 find_package(Boost 1.74.0 REQUIRED)
 
@@ -44,3 +54,8 @@ target_link_libraries(
     Fontconfig::Fontconfig
     Boost::boost
 )
+
+## サンプルコードのコンパイル
+if (${FCPP_EXAMPLE})
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/example)
+endif()
