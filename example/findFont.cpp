@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
         {FC_FAMILY, (const FcChar8*)(argv[1])}
     });
 
-    const auto FoundFath = Fcpp::SearchFont(Fcpp::CurrentDefaultConfig(), SearchPattern);
+    const auto FoundFath = Fcpp::SearchFont(SearchPattern);
     if(!FoundFath.empty()) {
         std::cout << FoundFath.generic_string() << std::endl;
     }

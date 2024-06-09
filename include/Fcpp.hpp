@@ -29,7 +29,18 @@ namespace Fcpp {
         return Fc_ptr<return_type_raw>(Func(args...), false);
     }
 
-    const std::filesystem::path SearchFont(const Config& conf, const Pattern& pattern) noexcept;
-    const Config CurrentDefaultConfig() noexcept;
+    /**
+     * @brief フォントを探す
+     * @param pattern 検索に用いるパターン
+     * @param conf 検索に用いるコンフィグ．nullptrの場合は現在のコンフィグが使われる．
+     * @return 見つけたフォントのファイルパス．空の場合は検索失敗．
+     */
+    const std::filesystem::path SearchFont(const Pattern& pattern, const Config& conf = nullptr) noexcept;
+
+    /**
+     * @brief パターンを生成する
+     * @param param パターンに追加するプロパティの一覧
+     * @return 生成されたパターン
+     */
     const Pattern CreatePattern(const std::map<std::string, std::basic_string<FcChar8>>& param) noexcept;
 }
