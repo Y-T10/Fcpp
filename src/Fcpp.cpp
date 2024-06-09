@@ -41,7 +41,7 @@ namespace {
     }
 }
 
-const std::filesystem::path Fcpp::SearchFont(const Config& conf, const Pattern& pattern) noexcept {
+const std::filesystem::path Fcpp::SearchFont(const Pattern& pattern, const Config& conf) noexcept {
     const auto SearchPattern = SubstitutePattern(conf, pattern);
     if (!SearchPattern) {
         return "";

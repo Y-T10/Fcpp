@@ -29,7 +29,7 @@ namespace Fcpp {
         return Fc_ptr<return_type_raw>(Func(args...), false);
     }
 
-    const std::filesystem::path SearchFont(const Config& conf, const Pattern& pattern) noexcept;
+    const std::filesystem::path SearchFont(const Pattern& pattern, const Config& conf = nullptr) noexcept;
     const Config CurrentDefaultConfig() noexcept;
     const Pattern CreatePattern(const std::map<std::string, std::basic_string<FcChar8>>& param) noexcept;
 }
