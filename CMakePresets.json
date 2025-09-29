@@ -1,0 +1,36 @@
+{
+    "version": 10,
+    "cmakeMinimumRequired": {
+        "major": 3, "minor": 31, "patch": 0
+    },
+    "$comment": "CMakeの最小バージョンはUbuntuの最新LSTにて利用可能なバイナリのバージョンに合わせる．",
+    "configurePresets": [
+        {
+            "name": "default",
+            "displayName": "Default config",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_CXX_SCAN_FOR_MODULES": false,
+                "BUILD_SHARED_LIBS": false, 
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "build_example",
+            "displayName": "Build example",
+            "inherits": [ "default" ],
+            "cacheVariables": {
+                "BUILD_EXAMPLE": true
+            }
+        }
+    ],
+    "buildPresets": [{
+        "name": "default", "configurePreset": "default"
+    }],
+    "workflowPresets": [{
+        "name": "default","steps": [
+            {"type": "configure", "name": "default"},
+            {"type": "build", "name": "default"}
+        ]
+    }]
+}
