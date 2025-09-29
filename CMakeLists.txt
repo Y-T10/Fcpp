@@ -1,5 +1,4 @@
-cmake_minimum_required(VERSION 3.25)
-cmake_policy(VERSION ${CMAKE_MINIMUM_REQUIRED_VERSION})
+cmake_minimum_required(VERSION 3.31)
 
 option(CMAKE_BUILD_TYPE "Build type. (Debug, Release)" Release)
 option(BUILD_SHARED_LIBS "Create shared libraries." OFF)
