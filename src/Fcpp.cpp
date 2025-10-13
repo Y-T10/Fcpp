@@ -53,16 +53,13 @@ const std::filesystem::path Fcpp::SearchFont(const Pattern& pattern, const Confi
     return std::filesystem::path((char*)filePaht);
 };
 
-const Fcpp::Pattern Fcpp::CreatePattern(const std::map<std::string, std::basic_string<FcChar8>>& param) noexcept {
+const Fcpp::Pattern Fcpp::CreatePattern(const std::vector<std::pair<const char*, const FcChar8*>>& props) noexcept {
     Pattern pattern = CreateFcPtr<FcPatternCreate>();
-    if(pattern.get() == nullptr) {
-        return nullptr;
-    }
-    if(param.empty()) {
-        return pattern;
-    }
-    for(const auto& p: param) {
-        if(!FcPatternAddString(pattern.get(), p.first.c_str(), p.second.c_str())) {
+    for(const auto& p: props) {
+        if (p.first == nullptr || p.second == nullptr) {
+            continue;
+        }
+        if(!FcPatternAddString(pattern.get(), p.first, p.second)) {
             return nullptr;
         }
     }
