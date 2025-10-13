@@ -13,9 +13,7 @@ void intrusive_ptr_release(FcConfig *p) {
     FcConfigDestroy(p);
 }
 
-namespace {
-    using namespace Fcpp;
-
+namespace Fcpp{
     const Pattern FontMatch(const Config& conf, const Pattern& pattern) noexcept {
         FcResult result;
         Pattern fontPattern = CreateFcPtr<FcFontMatch>(conf.get(), pattern.get(), &result);
