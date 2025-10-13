@@ -2,8 +2,6 @@
 
 #include <type_traits>
 #include <filesystem>
-#include <string>
-#include <map>
 
 #include "fontconfig/fontconfig.h"
 #include "boost/smart_ptr/intrusive_ptr.hpp"
@@ -39,8 +37,8 @@ namespace Fcpp {
 
     /**
      * @brief パターンを生成する
-     * @param param パターンに追加するプロパティの一覧
+     * @param props パターンに追加するプロパティの一覧
      * @return 生成されたパターン
      */
-    const Pattern CreatePattern(const std::map<std::string, std::basic_string<FcChar8>>& param) noexcept;
+    const Pattern CreatePattern(const std::vector<std::pair<const char*, const FcChar8*>>& props) noexcept;
 }
