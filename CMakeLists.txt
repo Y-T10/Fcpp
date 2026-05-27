@@ -6,6 +6,12 @@ project(Fcpp
     DESCRIPTION "Fontconfig c++ wrapper."
 )
 
+include(CMakeDependentOption)
+cmake_dependent_option(
+    FCPP_BUILD_EXAMPLE "Build example"
+    ON [[CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR]] OFF
+)
+
 find_package(Fontconfig 2.14.0 REQUIRED)
 find_package(Boost 1.74.0 REQUIRED)
 
@@ -33,7 +39,11 @@ target_link_libraries(
     Boost::boost
 )
 
-if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
-    ## サンプルコードのコンパイル
+if(NOT (CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR))
+    return()
+endif()
+
+## サンプルコードのコンパイル
+if(${FCPP_BUILD_EXAMPLE})
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/example)
 endif()
