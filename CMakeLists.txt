@@ -33,7 +33,7 @@ target_link_libraries(
     Boost::boost
 )
 
-## サンプルコードのコンパイル
-if (${BUILD_EXAMPLE})
+if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
+    ## サンプルコードのコンパイル
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/example)
 endif()
