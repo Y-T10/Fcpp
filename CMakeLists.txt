@@ -18,7 +18,7 @@ find_package(Boost 1.74.0 REQUIRED)
 add_library(${PROJECT_NAME})
 add_library("${PROJECT_NAME}::${PROJECT_NAME}" ALIAS ${PROJECT_NAME})
 
-target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_20)
+target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_23)
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_EXTENSIONS ON)
 
 target_sources(
